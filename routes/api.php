@@ -20,6 +20,7 @@ Route::group([
     'limit'      => 50,
     'expires'    => 1
 ], function () {
+    Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
 });
 
