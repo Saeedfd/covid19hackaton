@@ -48,7 +48,8 @@ class DoLogin extends BaseAction
         return [
             'user_id'   => $user->id,
             'token' =>  $token,
-            'name'  =>  $user->name
+            'name'  =>  $user->name,
+            'set_password'  =>  $user->set_password
         ];
     }
 
