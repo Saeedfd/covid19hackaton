@@ -41,6 +41,7 @@ Route::group([
     'middleware' => 'auth:api',
 ], function () {
     Route::get('single', 'PatientsController@GetSinglePatient');
+    Route::get('/contacts', 'PatientsController@getContacts');
     Route::post('/', 'PatientsController@AddPatient');
 });
 

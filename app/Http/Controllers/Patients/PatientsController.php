@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Patients;
 
 
+use App\Http\Controllers\Contacts\Actions\GetPatientContacts;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Patients\Actions\AddPatient;
 use App\Http\Controllers\Patients\Actions\GetSinglePatient;
@@ -80,6 +81,36 @@ class PatientsController extends Controller
             200,
             $result,
             'Success'
+        );
+    }
+
+    public function getContacts(GetPatientContacts $contacts)
+    {
+        // Do Validating
+        if (($errors = $contacts->validation()) !== true) {
+            return $this->returner->failureReturner(
+                400,
+                20005,
+                $errors,
+                "Invalid inputs"
+            );
+        }
+
+        $result = $contacts->execute();
+
+        if(isset($result['error'])) {
+            return $this->returner->failureReturner(
+                400,
+                20006,
+                $result['error'],
+                null
+            );
+        }
+
+        return $this->returner->successReturner(
+            200,
+            $result,
+            "Success"
         );
     }
 }
