@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Patients;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Patients\Actions\AddPatient;
+use App\Http\Controllers\Patients\Actions\GetSinglePatient;
 use App\Http\Controllers\Traits\Returner;
 
 class PatientsController extends Controller
@@ -49,6 +50,36 @@ class PatientsController extends Controller
             200,
             $result,
             'Successfully patient added.'
+        );
+    }
+
+    public function GetSinglePatient(GetSinglePatient $patient)
+    {
+        // Do Validating
+        if (($errors = $patient->validation()) !== true) {
+            return $this->returner->failureReturner(
+                400,
+                20003,
+                $errors,
+                "Invalid inputs"
+            );
+        }
+
+        $result = $patient->execute($errors);
+
+        if(isset($result['error'])) {
+            return $this->returner->failureReturner(
+                400,
+                20004,
+                $result['error'],
+                null
+            );
+        }
+
+        return $this->returner->successReturner(
+            200,
+            $result,
+            'Success'
         );
     }
 }

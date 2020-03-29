@@ -39,5 +39,6 @@ Route::group([
     'namespace'  => 'Patients',
     'middleware' => 'auth:api',
 ], function () {
+    Route::get('single', 'PatientsController@GetSinglePatient');
     Route::post('/', 'PatientsController@AddPatient');
 });
