@@ -31,11 +31,10 @@ class DoRegister extends BaseAction
 
     public function execute($data = null)
     {
-        $name   =   (isset($data['name']))  ?:  $this->request->input('name');
-        $email  =   (isset($data['email']))    ?:  $this->request->input('email');
-        $password   =   (isset($data['password']))  ?:  $this->request->input('password');
-        $role   =   (isset($data['role']))  ?:  $this->request->input('role');
-
+        $name   =   (isset($data['name']))  ?   $data['name']   :  $this->request->input('name');
+        $email  =   (isset($data['email']))    ?    $data['email']  :  $this->request->input('email');
+        $password   =   (isset($data['password']))  ?   $data['password']   :  $this->request->input('password');
+        $role   =   (isset($data['role']))  ?   $data['role']   :  $this->request->input('role');
 
         $user   =   new User();
         $user->name =   $name;
