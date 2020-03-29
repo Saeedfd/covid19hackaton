@@ -43,3 +43,11 @@ Route::group([
     Route::get('single', 'PatientsController@GetSinglePatient');
     Route::post('/', 'PatientsController@AddPatient');
 });
+
+Route::group([
+    'prefix'     => 'user',
+    'namespace'  => 'Users',
+    'middleware' => 'auth:api',
+], function () {
+    Route::get('/', 'UsersController@getMyInformation');
+});
