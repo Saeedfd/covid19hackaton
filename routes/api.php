@@ -32,6 +32,7 @@ Route::group([
     'expires'    => 1
 ], function () {
     Route::get('logout', 'AuthController@logout');
+    Route::post('set_password', 'AuthController@setPassword');
 });
 
 Route::group([

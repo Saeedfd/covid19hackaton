@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Authentication;
 use App\Http\Controllers\Authentication\Actions\DoLogin;
 use App\Http\Controllers\Authentication\Actions\DoLogout;
 use App\Http\Controllers\Authentication\Actions\DoRegister;
+use App\Http\Controllers\Authentication\Actions\SetPassword;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\Returner;
 
@@ -111,6 +112,36 @@ class AuthController extends Controller
             200,
             $result,
             'Successfully created.'
+        );
+    }
+
+    public function setPassword(SetPassword $user)
+    {
+        // Do Validating
+        if (($errors = $user->validation()) !== true) {
+            return $this->returner->failureReturner(
+                400,
+                10007,
+                $errors,
+                "Invalid inputs"
+            );
+        }
+
+        $result = $user->execute();
+
+        if(isset($result['error'])) {
+            return $this->returner->failureReturner(
+                400,
+                10007,
+                $result['error'],
+                null
+            );
+        }
+
+        return $this->returner->successReturner(
+            200,
+            $result,
+            'Successfully changed.'
         );
     }
 }
