@@ -33,3 +33,11 @@ Route::group([
 ], function () {
     Route::get('logout', 'AuthController@logout');
 });
+
+Route::group([
+    'prefix'     => 'patient',
+    'namespace'  => 'Patients',
+    'middleware' => 'auth:api',
+], function () {
+    Route::post('/', 'PatientsController@AddPatient');
+});
